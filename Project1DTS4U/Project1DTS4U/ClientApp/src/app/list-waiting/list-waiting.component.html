@@ -1,0 +1,80 @@
+
+<div class="row">
+  <div class="col-xs-offset-3 col-xs-6">
+
+
+    <button type="button" class="btn btn-primary" (click)="showEdit(waitingInsert)">
+      <span class="glyphicon glyphicon-plus"></span>
+    </button>
+
+    <div *ngIf="!isMassage&&isUpdateOrInsert" class="alert alert-success alertMessage txt-align" role="alert">
+      <strong>  {{massage}} </strong>
+    </div>
+
+    <div *ngIf="isMassage&&isUpdateOrInsert" class="alert alert-danger alertMessage txt-align" role="alert">
+      <strong>  {{errorMessage}} </strong>
+    </div>
+
+    <div class="panel panel-default panel-top">
+
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-5">
+            <input type="search" name="searchTbx" class="form-control" placeholder="חיפוש לפי שם"
+                   [(ngModel)]="searchValue" style=" text-align: right; " />
+          </div>
+          <div class="col-xs-5">
+            <input type="text" name="searchValueDate" class="form-control txt-align" placeholder="חיפוש לפי תאריך"
+                   [(ngModel)]="searchValueDate" onfocus="(this.type='date')" />
+          </div>
+          <div class="col-xs-2">
+            <h4>סנן לפי</h4>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-body table-responsive div-table">
+        <table class="table table table-hover table-fixed" >
+          <thead>
+            <tr>
+              <th scope="col">שם לקוח</th>
+              <th scope="col">תאריך</th>
+              <th scope="col">זמן ההגעה</th>
+              <th scope="col">פעולה</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let waiting of Waitings| WaitingFilter:searchValue:searchValueDate:filterMetadata">
+              <td (click)="showDetails(waiting)" scope="row">{{waiting.Name}}</td>
+              <td (click)="showDetails(waiting)">{{waiting.DateQueue|date:'dd/MM/yyyy'}}</td>
+              <td (click)="showDetails(waiting)">{{waiting.TimeQueue}}</td>
+              <!--<td (click)="showDetails(waiting)">{{waiting.DateQueue|date:'h:mm'}}</td>problem...-->
+
+              <td>
+                <div *ngIf="getUserIdFromUserToken==waiting.UserId">
+                  <a [routerLink]="" (click)="showEdit(waiting)" class="glyphicon glyphicon-pencil"></a> |
+                  <a [routerLink]="" (click)="deleteWaiting(waiting)" class="glyphicon glyphicon-trash"></a>
+                </div>
+
+                <div *ngIf="getUserIdFromUserToken!=waiting.UserId">
+                  <a class="glyphicon glyphicon-pencil" data-toggle="tooltip" title="ניתן לערוך רק רשומות השייכות לך"  style="color:gainsboro"></a> |
+                  <a class="glyphicon glyphicon-trash" data-toggle="tooltip" title="ניתן למחוק רק רשומות השייכות לך" style="color:gainsboro"></a>
+                </div>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="txt-align">
+      <h4> {{filterMetadata.count}} :סה"כ רשומות</h4>
+    </div>
+  </div>
+
+</div>
+
+<app-details-waiting [waiting2show]="waitingDetails" (OnCloseEvent)="closeDetails()"></app-details-waiting>
+<app-waiting-edit    [waitingEdit]="waitingEdit" (OnCloseEvent)="closeDetailsEdit()" (OnEditWaitingEvent)="EditWaiting($event)"></app-waiting-edit>

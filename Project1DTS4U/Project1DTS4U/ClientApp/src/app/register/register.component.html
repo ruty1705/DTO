@@ -1,0 +1,110 @@
+
+<div class="row">
+  <div class="form-group col-xs-offset-2 col-xs-8">
+
+    <div class="panel panel-default">
+
+      <div class="panel-heading">
+        <strong>
+          רישום ראשוני
+        </strong>
+      </div>
+
+      <div class="panel-body" style=" direction:rtl">
+
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-10"
+                 [class.has-error]="userForm.controls.UserName.invalid && userForm.controls.UserName.dirty">
+
+              <label class="control-label" for="UserName">שם משתמש</label>
+
+              <input type="text" formControlName="UserName" class="form-control" name="UserName" id="UserName" placeholder="הכנס שם משתמש" />
+
+              <div class="alert alert-danger"
+                   [hidden]="userForm.controls.UserName.valid ||(!isShowAllErrors && userForm.controls.UserName.pristine)">
+                <div *ngIf="userForm.controls.UserName.errors?.required">שם שדה חובה</div>
+                <div *ngIf="userForm.controls.UserName.errors?.pattern">הכנס שם משתמש באנגלית</div>
+                <div *ngIf="userForm.controls.UserName.errors?.maxlength||userForm.controls.UserName.errors?.minlength">הכנס שם משתמש עם לפחות 5 תווים  עד 10 תווים</div>
+              </div>
+
+            </div>
+          </div>
+
+          <!--------------------------->
+          <div formGroupName="passwordFormGrp">
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-10 "
+                   [class.has-error]="userForm.controls.passwordFormGrp.controls.Password.invalid && userForm.controls.passwordFormGrp.controls.Password.dirty">
+
+                <label class="control-label" for="Password">סיסמא</label>
+
+                <input type="text" formControlName="Password" name="Password" id="Password" onCopy="return false"  placeholder="הכנס סיסמא" class="form-control"  autocomplete="off" />
+
+                <div class="alert alert-danger"
+                  [hidden]="userForm.controls.passwordFormGrp.controls.Password.valid ||(!isShowAllErrors && userForm.controls.passwordFormGrp.controls.Password.pristine)">
+
+                  <div *ngIf="userForm.controls.passwordFormGrp.controls.Password.errors?.required">השדה סיסמא חובה </div>
+                  <div *ngIf="userForm.controls.passwordFormGrp.controls.Password.errors?.pattern">סיסמא צריכה להכיל אות גדולה וקטנה סימן ומספר ולפחות 8 תווים. </div>
+                  <div *ngIf="userForm.controls.passwordFormGrp.controls.Password.errors?.maxlength">הכנס סיסמא עד 10 תווים </div>
+                  <div *ngIf="userForm.controls.passwordFormGrp.controls.Password.errors?.emailTaken">סיסמא קיימת במערכת </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col-xs-offset-1 col-xs-10 "
+                   [class.has-error]="userForm.controls.passwordFormGrp.controls.confrimPassword.invalid
+                   && userForm.controls.passwordFormGrp.controls.confrimPassword.dirty">
+
+                <label class="control-label" for="confrimPassword">אימות סיסמא</label>
+
+                <input type="text" formControlName="confrimPassword" name="confrimPassword" id="confrimPassword" placeholder="הכנס אימות סיסמא" class="form-control"  />
+
+                <div class="alert alert-danger"
+                     [hidden]="userForm.controls.passwordFormGrp.valid ||
+               (!isShowAllErrors && userForm.controls.passwordFormGrp.controls.confrimPassword.pristine)">
+                  אימות סיסמא וסיסמא לא שווים
+                </div>
+
+                <!--<div *ngIf="userForm.controls.passwordFormGrp.controls.confrimPassword.errors?.required">
+                  השדה אימות סיסמא חובה
+                </div>-->
+
+               
+              </div>
+            </div>
+          </div>
+          <!------------------------->
+
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-10"
+                 [class.has-error]="userForm.controls.Name.invalid && userForm.controls.Name.dirty">
+
+              <label class="control-label" for="Name">שם</label>
+
+              <input type="text" formControlName="Name" class="form-control" name="Name" id="Name" placeholder="הכנס שם" />
+
+              <div class="alert alert-danger" [hidden]="userForm.controls.Name.valid ||(!isShowAllErrors && userForm.controls.Name.pristine)">
+                <div *ngIf="userForm.controls.Name.errors?.required">שם שדה חובה</div>
+                <div *ngIf="userForm.controls.Name.errors?.pattern">הכנס לשם  תווים באנגלית או עברית בלבד</div>
+                <div *ngIf="userForm.controls.Name.errors?.maxlength||userForm.controls.Name.errors?.minlength">הכנס שם עם לפחות 5 תווים</div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-xs-offset-1 col-xs-10">
+              <button type="submit" class="btn btn-block btn-success">הירשם</button>
+            </div>
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+ <!-- Modal -->
+<div class="modal fade" id="myWaitingDetailsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="text-align:right;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" (click)="raiseOnCloseEvent()"><span aria-hidden="true">&times;</span></button>
+        <h2 class="modal-title" id="myModalLabel">
+          <strong>
+            .פירוט ללקוח ממתין, {{waiting2show.Name}}
+          </strong>
+        </h2>
+      </div>
+
+      <div class="modal-body">
+        <p>
+          <strong>
+            שם לקוח:
+          </strong>
+          {{waiting2show.Name}}
+        </p>
+
+        <p>
+          <strong>
+            זמן ההגעה המיועד:
+          </strong>
+          {{waiting2show.DateQueue| date:'dd/MM/yyyy'}} {{waiting2show.TimeQueue}}
+        </p>
+        <p>
+          <strong>
+            זמן יצירת בקשת התור:
+          </strong>
+          {{waiting2show.DateAdded| date:'dd/MM/yyyy, hh:mm'}}
+        </p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="raiseOnCloseEvent()">סגירה</button>
+      </div>
+
+    </div>
+  </div>
+</div>

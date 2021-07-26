@@ -1,0 +1,50 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+code {
+  color: #e01a76;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.panel-heading {
+text-align:right
+}
+
+th {
+  text-align: right
+}
+
+table {
+  direction: rtl;
+}
+
+p {
+  font-size: x-large;
+}
+
+.txt-align {
+  text-align: right;
+}
+.panel-top {
+  margin-top: 1%
+}
+
+
+.div-table {
+  display: block;
+  overflow-y: scroll;
+  max-height: 505px;
+}
+
+table {
+  margin: auto;
+}
